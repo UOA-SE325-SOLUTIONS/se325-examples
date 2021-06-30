@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!-- Hello-world servlet -->
+    <servlet>
+        <servlet-name>HelloWorldServlet</servlet-name>
+        <servlet-class>se325.example03.servlets.HelloWorldServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloWorldServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+    <!-- Multiply servlet -->
+    <servlet>
+        <servlet-name>MultiplyServlet</servlet-name>
+        <servlet-class>se325.example03.servlets.MultiplyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MultiplyServlet</servlet-name>
+        <url-pattern>/basicMultiply</url-pattern>
+    </servlet-mapping>
+
+
+</web-app>
