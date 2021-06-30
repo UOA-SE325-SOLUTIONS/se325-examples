@@ -12,3 +12,6 @@ This repository contains example code demonstrating various concepts introduced 
 - *[Example 04](./example-04-soap)*: Contains a simple "hello world" SOAP service written in Java.
 
 - *[Example 05](./example-05-jax-rs)*: Contains two REST services written using JAX-RS.
+
+- *[Example 06](./example-06-json-with-jackson)*: Contains several examples showing how to use Jackson to serialize / deserialize JSON from our Java programs.
+
