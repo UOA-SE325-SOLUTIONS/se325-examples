@@ -18,3 +18,5 @@ This repository contains example code demonstrating various concepts introduced 
 - *[Example 07](./example-07-jaxrs-custom-serialization)*: Extends our parolee service running example with support for a custom data format - Java serialization.
 
 - *[Example 08](./example-08-jaxrs-json)*: Extends our parolee service running example with support for JSON, without having to manually write out JSON strings.
+
+- *[Example 09](./example-09-jpa-intro)*: A simple example showing JPA and Hibernate usage.
