@@ -1,0 +1,35 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="se325.examples.auction">
+        <!--  Classes which are to be mapped and therefore persistent. -->
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <properties>
+            <!--  Configure the data source. In this case the embedded H2 database
+                  is used. -->
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/test;mv_store=false"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value="sa"/>
+
+            <!-- Configure JPA to drop and re-create the SQL schema (tables) in the
+                 database at start-up time. This is useful for automated testing,
+                 because a clean database is used on each test run. -->
+            <property name="javax.persistence.schema-generation.database.action"
+                      value="drop-and-create"/>
+
+            <!-- Configure Hibernate to print out all SQL code that is generated and
+                executed. format_sql causes the output to be formatted and more easily
+                read. use_sql_comments generates comments to explain why the SQL is
+                generated. When these properties are set to true, the output occurs
+                regardless of any log4j output-level settings. -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+        </properties>
+
+    </persistence-unit>
+</persistence>
