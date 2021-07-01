@@ -1,5 +1,5 @@
 # SOFTENG 325 Examples Repository
-This repository contains example code demonstrating various concepts introduced in SOFTENG 325.
+This repository contains example code demonstrating various concepts introduced in SOFTENG 325 at the University of Auckland.
 
 ## Index
 
@@ -15,3 +15,6 @@ This repository contains example code demonstrating various concepts introduced 
 
 - *[Example 06](./example-06-json-with-jackson)*: Contains several examples showing how to use Jackson to serialize / deserialize JSON from our Java programs.
 
+- *[Example 07](./example-07-jaxrs-custom-serialization)*: Extends our parolee service running example with support for a custom data format - Java serialization.
+
+- *[Example 08](./example-08-jaxrs-json)*: Extends our parolee service running example with support for JSON, without having to manually write out JSON strings.
