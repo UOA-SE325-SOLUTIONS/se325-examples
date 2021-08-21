@@ -26,3 +26,5 @@ This repository contains example code demonstrating various concepts introduced 
 - *[Example 11](./example-11-parolee-nojpa)*: A more thoroughly implemented Parolee web service. Written without JPA / Hibernate, for comparison with example 12 below.
 
 - *[Example 12](./example-12-parolee-with-jpa)*: Identical to example 11, but uses JPA / Hibernate for persistence.
+
+- *[Example 13](./example-13-parolee-async)*: Builds on example 12, adding an asynchronous web method allowing users to subscribe to parole violations.
