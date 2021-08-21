@@ -1,7 +1,10 @@
 package se325.example13.parolee.services;
 
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import se325.example13.parolee.common.Gender;
 import se325.example13.parolee.common.Offence;
 import se325.example13.parolee.dto.*;
@@ -16,50 +19,40 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.*;
 
 public class ParoleeWebServiceIT {
     private static final String WEB_SERVICE_URI = "http://localhost:10000/services/parolees";
 
-    private static Client CLIENT;
+    private Client client;
 
     /**
-     * One-time setup method that creates a Web service CLIENT.
-     */
-    @BeforeClass
-    public static void setUpClient() {
-        CLIENT = ClientBuilder.newClient();
-    }
-
-    /**
-     * Runs before each unit test to restore Web service database. This ensures
-     * that each test is independent; each test runs on a Web service that has
-     * been initialised with a common set of Parolees.
+     * Before each test, create a new client and reset the server
      */
     @Before
-    public void reloadServerData() {
-        Response response = CLIENT
-                .target(WEB_SERVICE_URI + "-test/reset-database").request()
-                .put(null);
-        response.close();
+    public void setUp() {
 
-        // Pause briefly before running any tests. Test addParoleeMovement(),
-        // for example, involves creating a timestamped value (a movement) and
-        // having the Web service compare it with data just generated with
-        // timestamps.
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
+        client = ClientBuilder.newClient();
+
+        try (Response response = client
+                .target(WEB_SERVICE_URI + "-test/reset-database").request()
+                .put(null)) {
+
+            assertEquals(204, response.getStatus());
         }
     }
 
     /**
-     * One-time finalisation method that destroys the Web service CLIENT.
+     * After each test, close the client to free resources
      */
-    @AfterClass
-    public static void destroyClient() {
-        CLIENT.close();
+    @After
+    public void tearDown() {
+        client.close();
     }
 
     /**
@@ -72,7 +65,7 @@ public class ParoleeWebServiceIT {
         ParoleeDTO zoran = new ParoleeDTO("Salcic", "Zoran", Gender.MALE,
                 LocalDate.of(1958, 5, 17), homeAddress);
 
-        Response response = CLIENT
+        Response response = client
                 .target(WEB_SERVICE_URI).request()
                 .post(Entity.json(zoran));
 
@@ -84,7 +77,7 @@ public class ParoleeWebServiceIT {
         response.close();
 
         // Query the Web service for the new Parolee.
-        ParoleeDTO zoranFromService = CLIENT.target(location).request()
+        ParoleeDTO zoranFromService = client.target(location).request()
                 .accept(MediaType.APPLICATION_JSON).get(ParoleeDTO.class);
 
         // The original local Parolee object (zoran) should have a value equal
@@ -101,16 +94,15 @@ public class ParoleeWebServiceIT {
     }
 
     /**
-     * Tests that the Web serves can process requests to record new Parolee
-     * movements.
+     * Tests that the Web serves can process requests to record new Parolee movements.
      */
     @Test
-    public void addParoleeMovement() {
+    public void testAddParoleeMovement() {
         LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.NOON);
         MovementDTO newLocation = new MovementDTO(now, new GeoPositionDTO(
                 -36.848238, 174.762212));
 
-        Response response = CLIENT
+        Response response = client
                 .target(WEB_SERVICE_URI + "/1/movements")
                 .request().post(Entity.json(newLocation));
         if (response.getStatus() != 204) {
@@ -120,7 +112,7 @@ public class ParoleeWebServiceIT {
 
         // Query the Web service for the Parolee whose location has been
         // updated.
-        ParoleeDTO oliver = CLIENT
+        ParoleeDTO oliver = client
                 .target(WEB_SERVICE_URI + "/1").request()
                 .accept(MediaType.APPLICATION_JSON).get(ParoleeDTO.class);
 
@@ -132,11 +124,11 @@ public class ParoleeWebServiceIT {
      * Tests that the Web service can process Parolee update requests.
      */
     @Test
-    public void updateParolee() {
+    public void testUpdateParolee() {
         final String targetUri = WEB_SERVICE_URI + "/2";
 
         // Query a Parolee (Catherine) from the Web service.
-        ParoleeDTO catherine = CLIENT.target(targetUri).request()
+        ParoleeDTO catherine = client.target(targetUri).request()
                 .accept(MediaType.APPLICATION_JSON).get(ParoleeDTO.class);
 
         AddressDTO originalAddress = catherine.getHomeAddress();
@@ -146,7 +138,7 @@ public class ParoleeWebServiceIT {
                 "Auckland", "1022");
         catherine.setHomeAddress(newAddress);
 
-        Response response = CLIENT.target(targetUri).request()
+        Response response = client.target(targetUri).request()
                 .put(Entity.json(catherine));
 
         if (response.getStatus() != 204) {
@@ -155,7 +147,7 @@ public class ParoleeWebServiceIT {
         response.close();
 
         // Requery Parolee from the Web service.
-        ParoleeDTO updatedCatherine = CLIENT.target(targetUri).request()
+        ParoleeDTO updatedCatherine = client.target(targetUri).request()
                 .accept(MediaType.APPLICATION_JSON).get(ParoleeDTO.class);
 
         // Parolee's home address should have changed.
@@ -167,10 +159,10 @@ public class ParoleeWebServiceIT {
      * Tests that the Web service can add disassociates to a Parolee.
      */
     @Test
-    public void updateDisassociates() {
+    public void testUpdateDisassociates() {
 
         // Query Catherines's disassociates.
-        List<ParoleeDTO> disassociates = CLIENT
+        List<ParoleeDTO> disassociates = client
                 .target(WEB_SERVICE_URI + "/2/disassociates")
                 .request().accept(MediaType.APPLICATION_JSON)
                 .get(new GenericType<>() {
@@ -185,7 +177,7 @@ public class ParoleeWebServiceIT {
         GenericEntity<Set<Long>> entity = new GenericEntity<>(newDisassociates) {
         };
 
-        Response response = CLIENT
+        Response response = client
                 .target(WEB_SERVICE_URI + "/2/disassociates")
                 .request().put(Entity.json(entity));
 
@@ -197,7 +189,7 @@ public class ParoleeWebServiceIT {
         // Requery Catherine's dissassociates. The GET request is expected to
         // return a List<ParoleeDTO> object; since this is a parameterized type, a
         // GenericType wrapper is required so that the data can be unmarshalled.
-        List<ParoleeDTO> updatedDisassociates = CLIENT
+        List<ParoleeDTO> updatedDisassociates = client
                 .target(WEB_SERVICE_URI + "/2/disassociates")
                 .request().accept(MediaType.APPLICATION_JSON)
                 .get(new GenericType<>() {
@@ -211,11 +203,14 @@ public class ParoleeWebServiceIT {
 
     }
 
+    /**
+     * Tests that we can update a parolee's convictions
+     */
     @Test
-    public void updateConvictions() {
+    public void testUpdateConvictions() {
         final String targetUri = WEB_SERVICE_URI + "/1/convictions";
 
-        Set<ConvictionDTO> convictionsForOliver = CLIENT.target(targetUri).request()
+        Set<ConvictionDTO> convictionsForOliver = client.target(targetUri).request()
                 .accept(MediaType.APPLICATION_JSON).get(new GenericType<>() {
                 });
 
@@ -227,7 +222,7 @@ public class ParoleeWebServiceIT {
                 LocalDate.now(), "Shoplifting", Offence.THEFT));
 
         // Send a Web service request to update the profile.
-        Response response = CLIENT.target(targetUri).request()
+        Response response = client.target(targetUri).request()
                 .put(Entity.json(convictionsForOliver));
 
         if (response.getStatus() != 204) {
@@ -236,7 +231,7 @@ public class ParoleeWebServiceIT {
         response.close();
 
         // Requery Oliver's criminal profile.
-        Set<ConvictionDTO> reQueriedConvictions = CLIENT.target(targetUri).request()
+        Set<ConvictionDTO> reQueriedConvictions = client.target(targetUri).request()
                 .accept(MediaType.APPLICATION_JSON).get(new GenericType<>() {
                 });
 
@@ -249,8 +244,8 @@ public class ParoleeWebServiceIT {
      * Tests that the Web service can handle requests to query a particular Parolee.
      */
     @Test
-    public void queryParolee() {
-        ParoleeDTO parolee = CLIENT
+    public void testRetrieveParolee() {
+        ParoleeDTO parolee = client
                 .target(WEB_SERVICE_URI + "/1").request()
                 .accept(MediaType.APPLICATION_JSON).get(ParoleeDTO.class);
 
@@ -262,8 +257,8 @@ public class ParoleeWebServiceIT {
      * Tests that the Web service processes requests for all Parolees.
      */
     @Test
-    public void queryAllParolees() {
-        List<ParoleeDTO> parolees = CLIENT
+    public void testRetrieveAllParolees() {
+        List<ParoleeDTO> parolees = client
                 .target(WEB_SERVICE_URI).request()
                 .accept(MediaType.APPLICATION_JSON)
                 .get(new GenericType<>() {
@@ -275,14 +270,13 @@ public class ParoleeWebServiceIT {
     }
 
     /**
-     * Tests that the Web service processes requests for Parolees using header
-     * links for HATEOAS.
+     * Tests that the Web service processes requests for Parolees using header links for HATEOAS.
      */
     @Test
-    public void queryAllParoleesUsingHATEOAS() {
+    public void testRetrieveParolees_HATEOAS() {
         // Make a request for Parolees, page = 0 and page size = 2. Should return the first two
         // parolees, along with a "next" header and no "prev" header.
-        Response response = CLIENT
+        Response response = client
                 .target(WEB_SERVICE_URI + "?page=0&size=2").request().get();
 
         // Extract links and entity data from the response.
@@ -304,7 +298,7 @@ public class ParoleeWebServiceIT {
         assertEquals("<" + WEB_SERVICE_URI + "?page=1&size=2>; rel=\"next\"", next.toString());
 
         // Invoke next link and extract response data.
-        response = CLIENT.target(next).request().get();
+        response = client.target(next).request().get();
         previous = response.getLink("prev");
         next = response.getLink("next");
         parolees = response.readEntity(new GenericType<>() {
@@ -321,12 +315,11 @@ public class ParoleeWebServiceIT {
     }
 
     /**
-     * Tests that the Web service can process requests for a particular
-     * Parolee's movements.
+     * Tests that the Web service can process requests for a particular Parolee's movements.
      */
     @Test
-    public void queryParoleeMovements() {
-        List<MovementDTO> movementsForOliver = CLIENT
+    public void testRetrieveParoleeMovements() {
+        List<MovementDTO> movementsForOliver = client
                 .target(WEB_SERVICE_URI + "/1/movements")
                 .request().accept(MediaType.APPLICATION_JSON)
                 .get(new GenericType<>() {
@@ -338,5 +331,45 @@ public class ParoleeWebServiceIT {
         // Make sure they're in timestamp order, latest first.
         assertTrue(movementsForOliver.get(0).getTimestamp().isAfter(movementsForOliver.get(1).getTimestamp()));
         assertTrue(movementsForOliver.get(1).getTimestamp().isAfter(movementsForOliver.get(2).getTimestamp()));
+    }
+
+    /**
+     * Tests that we can subscribe to be notified of parole violations, and that we get notified successfully when such
+     * a violation occurs.
+     */
+    @Test
+    public void testSubscribeToParoleViolation() throws ExecutionException, InterruptedException, TimeoutException {
+
+        // Oliver (ID 1) has a curfew from 7pm - 7am, at position -36.865520, 174.859520
+
+        // Subscribe
+        Future<Response> future = client.target(WEB_SERVICE_URI + "/1/subscribe-to-violations").request().async().post(null);
+
+        // Oliver is not currently violating parole, so we shouldn't be notified just yet. Wait a second and see.
+        try {
+            future.get(1, TimeUnit.SECONDS);
+            fail("Shouldn't have been successful as we're not violating parole yet");
+        } catch (TimeoutException e) {
+
+            // Oliver moves to a wine shop at 9pm - a definite no-no!
+            MovementDTO movement = new MovementDTO(
+                    LocalDateTime.of(LocalDate.now(), LocalTime.of(21, 0)),
+                    new GeoPositionDTO(-36.86555779774085, 174.85125285194638)
+            );
+            try (Response response = client.target(WEB_SERVICE_URI + "/1/movements")
+                    .request().post(Entity.json(movement))) {
+                assertEquals(204, response.getStatus());
+            }
+
+            // Now this should succeed. If we don't get notified within a few seconds, fail.
+            // Otherwise, make sure the notification contains the correct info.
+            try (Response notification = future.get(5, TimeUnit.SECONDS)) {
+                assertEquals(200, notification.getStatus());
+                ParoleViolationDTO violation = notification.readEntity(ParoleViolationDTO.class);
+                assertEquals(1L, violation.getParoleeId());
+                assertEquals(movement.getPosition(), violation.getLocation());
+            }
+
+        }
     }
 }

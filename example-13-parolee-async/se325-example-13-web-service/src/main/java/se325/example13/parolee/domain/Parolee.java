@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class to represent a Parolee. A Parolee is described by:
@@ -42,6 +43,9 @@ public class Parolee {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Movement> movements = new HashSet<>();
+
+    @Embedded
+    private Curfew curfew;
 
     public Parolee() {
     }
@@ -121,16 +125,25 @@ public class Parolee {
     }
 
     /**
+     * Streams the movements, in a sorted order. Sorted by timestamp, latest first.
+     */
+    private Stream<Movement> getMovementsStream() {
+        return movements.stream()
+                .sorted(Comparator.comparing(Movement::getTimestamp, Comparator.reverseOrder()));
+    }
+
+    /**
      * Gets the movements, in a sorted order. Sorted by timestamp, latest first.
      */
     public List<Movement> getMovements() {
-        return movements.stream()
-                .sorted(Comparator.comparing(Movement::getTimestamp, Comparator.reverseOrder()))
-                .collect(Collectors.toUnmodifiableList());
+        return getMovementsStream().collect(Collectors.toUnmodifiableList());
     }
 
+    /**
+     * Gets the most recent movement, or null if there are none.
+     */
     public Movement getLastKnownPosition() {
-        return movements.stream().findFirst().orElse(null);
+        return getMovementsStream().findFirst().orElse(null);
     }
 
     public Set<Parolee> getDisassociates() {
@@ -147,6 +160,14 @@ public class Parolee {
 
     public void setConvictions(Set<Conviction> convictions) {
         this.convictions = convictions;
+    }
+
+    public Curfew getCurfew() {
+        return curfew;
+    }
+
+    public void setCurfew(Curfew curfew) {
+        this.curfew = curfew;
     }
 
     @Override

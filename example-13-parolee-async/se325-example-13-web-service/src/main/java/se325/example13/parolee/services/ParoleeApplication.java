@@ -15,10 +15,9 @@ public class ParoleeApplication extends Application {
 
     public ParoleeApplication() {
         singletons.add(PersistenceManager.instance());
+        singletons.add(SubscriptionManager.instance());
         classes.add(ParoleeResource.class);
         classes.add(TestResource.class);
-
-//        new TestResource().reloadDatabase();
     }
 
     @Override

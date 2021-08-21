@@ -13,6 +13,8 @@ import se325.example13.parolee.dto.ParoleeDTO;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.*;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.*;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import java.net.URI;
@@ -80,6 +82,9 @@ public class ParoleeResource {
 
             parolee.addMovement(MovementMapper.toDomain(movement));
             em.getTransaction().commit();
+
+            // Since a parolee moved, we want to check for parole violations and notify anyone listening for them.
+            SubscriptionManager.instance().processSubsFor(parolee.getId());
 
             // JAX-RS will add the default response code to the HTTP response message.
         } finally {
@@ -414,5 +419,23 @@ public class ParoleeResource {
         } finally {
             em.close();
         }
+    }
+
+    /**
+     * Subscribes to be notified when a parolee with the given id violates parole. Getting notified may take
+     * some time (depending on the parolee), so this is an async web service method, using {@link AsyncResponse}
+     * to eventually send responses back to the client.
+     *
+     * @param paroleeId the id of the parolee to subscribe to
+     * @param sub       the {@link AsyncResponse} used to send the notification back when appropriate
+     */
+    @POST
+    @Path("/{id}/subscribe-to-violations")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void subscribeToParoleeViolations(@PathParam("id") long paroleeId, @Suspended AsyncResponse sub) {
+        SubscriptionManager.instance().addSubscription(paroleeId, sub);
+
+        // That parolee might already be violating parole, so let's process subs now
+        SubscriptionManager.instance().processSubsFor(paroleeId);
     }
 }
