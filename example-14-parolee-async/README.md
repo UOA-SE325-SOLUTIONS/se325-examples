@@ -1,4 +1,4 @@
-# SE325 Example 13 - Asynchronous Web Services
+# SE325 Example 14 - Asynchronous Web Services
 This project contains a parolee web service identical to [Example 12](../example-12-parolee-with-jpa), except:
 - The structure has been changed to be much similar to that given in Assignment One,
 - Test data is now initialized with a *.sql script (`db-init.sql`) instead of Java code, and

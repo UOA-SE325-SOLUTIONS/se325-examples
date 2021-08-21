@@ -27,4 +27,8 @@ This repository contains example code demonstrating various concepts introduced 
 
 - *[Example 12](./example-12-parolee-with-jpa)*: Identical to example 11, but uses JPA / Hibernate for persistence.
 
+- *[Example 13](./example-13-chat-async)*: Shows how a rudimentary chat app can be build using JAX-RS support for asynchronous web services. Compare and contrast this with the WebSockets approach in Example 15.
+
 - *[Example 14](./example-14-parolee-async)*: Builds on example 12, adding an asynchronous web method allowing users to subscribe to parole violations.
+
+- *[Example 15](./example-15-chat-websockets)*: Shows how a rudimentary chat app can be build using WebSockets. Compare and contrast this with the async web services approach in Example 13.
