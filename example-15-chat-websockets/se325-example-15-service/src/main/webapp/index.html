@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example 15 - WebSockets Chat</title>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="./js/main.js"></script>
+</head>
+<body>
+
+<h1>Simple WebSocket chat client</h1>
+
+<h2>Server connection</h2>
+<form id="connect-form">
+    <label for="username">Your username:</label>
+    <input type="text" id="username" required>
+    <button type="submit">Connect</button>
+</form>
+<button id="disconnect-button">Disconnect</button>
+
+<h2>Send a message</h2>
+<form id="send-message-form">
+    <label for="message">Your message:</label>
+    <input type="text" id="message" required>
+    <button type="submit">Send!</button>
+</form>
+
+<h2>Chat history</h2>
+<div id="chat-history"></div>
+
+</body>
+</html>
