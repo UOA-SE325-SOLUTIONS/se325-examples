@@ -8,7 +8,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -39,7 +38,7 @@ public class ChatResource {
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response postMessage(Message message) {
+    public void postMessage(Message message) {
 
         LOGGER.warn(message.toString());
 
@@ -54,8 +53,6 @@ public class ChatResource {
                 subs.remove(sub);
             }
         });
-
-        return Response.ok().build();
 
     }
 

@@ -10,6 +10,9 @@ import se325.asyncchat.jackson.LocalDateTimeSerializer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A simple POJO to send as JSON back and forth between client and service
+ */
 public class Message {
 
     private String username;

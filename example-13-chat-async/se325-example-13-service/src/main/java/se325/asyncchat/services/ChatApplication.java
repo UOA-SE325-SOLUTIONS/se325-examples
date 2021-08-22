@@ -7,6 +7,9 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A standard JAX-RS resource class. Nothing too fancy here.
+ */
 @ApplicationPath("/services")
 public class ChatApplication extends Application {
 

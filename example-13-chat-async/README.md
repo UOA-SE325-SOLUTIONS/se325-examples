@@ -3,9 +3,9 @@ This example shows how a rudimentary chat app can be build using JAX-RS support 
 
 
 ## Running the app
-To run the example, you can run the `ChatServerRunner` class directly from IntelliJ - no Maven goals required. The server runner starts an embedded instance of Jetty, essentially allowing you to host a JAX-RS service from within a standard Java app.
+The server can be run within a web servlet container such as Tomcat, just as with any other JAX-RS service. Follow the instructional video on Canvas if you need a reminder of how to do this. The client code assumes an app context of `/`, but this can be changed by editing `ClientMain` line 15 if desired.
 
-You can run one client (`ClientMain`) in the same way. To give that client someone to chat to, you'll need to run two clients though. To do this, run Maven's `package` goal, then browse to the `se325-example-13-client/target` folder. Then run the following command in a terminal:
+Once the server is running, one instance of the client can be run by running `ClientMain` directly from IntelliJ - no Maven goals required. However, to give that client someone to chat to, you'll need to run two clients. To do this, run Maven's `package` goal, then browse to the `se325-example-13-client/target` folder. Then run the following command in a terminal:
 
 ```shell
 java -jar se325-example-13-client-1.0-spring-boot.jar
@@ -15,9 +15,9 @@ You can run as many client instances as you like - just open a separate terminal
 
 
 ## The client
-Within `ClientMain`, you can see how on line 37, we make an asynchronous web request to the service. We supply an instance of `InvocationCallback`, whose `completed()` method will be called by JAX-RS when the service responds - or whose `failed()` method will be called if there is a failure of some kind.
+Within `ClientMain`, you can see how on line 38, we make an asynchronous web request to the service. We supply an instance of `InvocationCallback`, whose `completed()` method will be called by JAX-RS when the service responds - or whose `failed()` method will be called if there is a failure of some kind.
 
-We want to keep receiving chat messages after the server responds the first time. Therefore, on line 44, as soon as we receive a response from the server, we re-subscribe.
+That callback can be seen on line 46. Whenever a message is received (in the `completed()` method on line 56), we display that message. In addition, we want to keep receiving chat messages after the server responds the first time. Therefore, on line 59, as soon as we receive a response from the server, we re-subscribe.
 
 
 ## The service
