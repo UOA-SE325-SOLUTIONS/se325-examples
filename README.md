@@ -32,3 +32,5 @@ This repository contains example code demonstrating various concepts introduced 
 - *[Example 14](./example-14-parolee-async)*: Builds on example 12, adding an asynchronous web method allowing users to subscribe to parole violations.
 
 - *[Example 15](./example-15-chat-websockets)*: Shows how a rudimentary chat app can be build using WebSockets. Compare and contrast this with the async web services approach in Example 13.
+
+- *[Example 16](./example-16-parolee-websockets)*: Shows how we can integrate WebSockets with a larger application, by extending our Parolee web service with support for subscribing to parolee movements.
