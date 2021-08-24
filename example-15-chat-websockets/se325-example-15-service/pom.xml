@@ -50,32 +50,5 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf.version}</version>
 		</dependency>
-
-		<!-- Embedded Jetty -->
-<!--		<dependency>-->
-<!--			<groupId>org.eclipse.jetty</groupId>-->
-<!--			<artifactId>jetty-server</artifactId>-->
-<!--			<version>${jetty.version}</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.eclipse.jetty</groupId>-->
-<!--			<artifactId>jetty-servlet</artifactId>-->
-<!--			<version>${jetty.version}</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.eclipse.jetty</groupId>-->
-<!--			<artifactId>jetty-webapp</artifactId>-->
-<!--			<version>${jetty.version}</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.eclipse.jetty.websocket</groupId>-->
-<!--			<artifactId>websocket-server</artifactId>-->
-<!--			<version>${jetty.version}</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.eclipse.jetty.websocket</groupId>-->
-<!--			<artifactId>javax-websocket-server-impl</artifactId>-->
-<!--			<version>${jetty.version}</version>-->
-<!--		</dependency>-->
 	</dependencies>
 </project>
