@@ -89,7 +89,7 @@ public class ClientMain {
 
                 try (Response response = chatClient.target(WEB_SERVICE_URI).request().post(Entity.json(message))) {
                     if (response.getStatus() != 204) {
-                        System.err.println("Response was " + response.getStatusInfo() + "!");
+                        System.err.println("Response was " + response.getStatus() + " " + response.getStatusInfo() + "!");
                     }
                 }
             }
