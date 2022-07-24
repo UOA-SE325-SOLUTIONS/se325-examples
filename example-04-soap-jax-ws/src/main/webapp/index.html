@@ -5,30 +5,6 @@
     <title>SE325 Lecture 04 Examples</title>
 </head>
 <body>
-
-<p><span>Your name: </span> <input type="text" id="txt-name">
-</p>
-
-<button onclick="getGreeting()">Get Greeted!</button>
-
-<p><span><strong>Greeting: </strong></span><span id="span-greeting"></span></p>
-
+<h1>Hello, world!</h1>
 </body>
-
-<script>
-
-    async function getGreeting() {
-
-        const input = document.querySelector('#txt-name');
-        const name = input.value;
-
-        const response = await fetch(`./services/greetings/hello?name=${name}`);
-        const json = await response.json();
-
-        const output = document.querySelector('#span-greeting');
-        output.innerText = json.greeting;
-
-    }
-
-</script>
 </html>
