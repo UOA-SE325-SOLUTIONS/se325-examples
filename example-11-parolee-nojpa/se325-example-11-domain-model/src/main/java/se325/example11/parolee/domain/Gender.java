@@ -1,8 +1,8 @@
 package se325.example11.parolee.domain;
 
 /**
- * Enumerated type to represent gender.
+ * Simple enumeration for representing Gender.
  */
 public enum Gender {
-    MALE, FEMALE, OTHER;
+	MALE, FEMALE, NON_BINARY, AGENDER, OTHER;
 }
