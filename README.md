@@ -34,3 +34,7 @@ This repository contains example code demonstrating various concepts introduced 
 - *[Example 15](./example-15-chat-websockets)*: Shows how a rudimentary chat app can be build using WebSockets. Compare and contrast this with the async web services approach in Example 13.
 
 - *[Example 16](./example-16-parolee-websockets)*: Shows how we can integrate WebSockets with a larger application, by extending our Parolee web service with support for subscribing to parolee movements.
+
+### Bonus examples
+
+- *[Bonus 01](./example-bonus-01-reflection)*: A "simple" program using Java Reflection to scan for, instantiate and invoke classes / methods with various annotations. Included to show some of the detail in how JAX-RS and other annotation-based libraries work behind the scenes. 
