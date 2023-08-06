@@ -63,6 +63,16 @@ public class ReflectiveMethodInvoker {
         }
     }
 
+    /**
+     * Invokes the given method on the given object with the given named args. Args are mapped to actual method params
+     * based on annotations ({@link MethodParam}). If some method parameters are not annotated, they will be supplied
+     * with the default value for that parameter type (<code>null</code> for object types, 0 for integers, etc).
+     *
+     * @param object the object on which to invoke the method
+     * @param method the method to invoke
+     * @param args   args which should be supplied to annotated method params.
+     * @throws ReflectiveOperationException
+     */
     public static void invokeMethod(Object object, Method method, Map<String, Object> args) throws ReflectiveOperationException {
 
         var parameterValues = getParameters(method, args);

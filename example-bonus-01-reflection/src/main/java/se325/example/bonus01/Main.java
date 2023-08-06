@@ -6,6 +6,15 @@ import java.util.Map;
 
 public class Main {
 
+    /**
+     * Main program entry points. Passes some args into the {@link ReflectiveMethodInvoker}, which act as values to
+     * be passed into various invoked methods.
+     *
+     * @param args
+     * @throws IOException                  if there's an error reading information from the class loader.
+     * @throws ReflectiveOperationException if any reflective code malfunctions in some way (class not found, method has
+     *                                      wrong parameter types, method throws an exception, etc).
+     */
     public static void main(String[] args) throws IOException, ReflectiveOperationException {
 
         Map<String, Object> methodArgs = new HashMap<>();

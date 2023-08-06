@@ -4,6 +4,11 @@ import se325.example.bonus01.annotations.MethodParam;
 import se325.example.bonus01.annotations.RunnableClass;
 import se325.example.bonus01.annotations.RunnableMethod;
 
+/**
+ * A test class which has been annotated. The {@link ReflectiveMethodInvoker} will be able to discover this class,
+ * read its annotations, and decide what to do with it (i.e. invoke the annotated methods, supplied with the annotated
+ * method arguments) based on those annotations.
+ */
 @RunnableClass
 public class MyRunnableClass {
 
