@@ -1,12 +1,12 @@
 package se325.example01.employees;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 public class TestEmployees {
 
@@ -14,7 +14,7 @@ public class TestEmployees {
     private Employee e1;
     private Employee e2;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         mgr = new Manager("David", "8653899");
         e1 = new Employee("Tim", "2368571", mgr);

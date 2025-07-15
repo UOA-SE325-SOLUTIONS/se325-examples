@@ -10,7 +10,7 @@ import java.net.Socket;
 public class Server {
 
     public static void main(String[] args) {
-        try (ServerSocket socket = new ServerSocket(0)) {
+        try (ServerSocket socket = new ServerSocket(10000)) {
 
             InetAddress serverHost = InetAddress.getLocalHost();
             System.out.println("Server destination: " + serverHost.getHostAddress() + ":" + socket.getLocalPort());
