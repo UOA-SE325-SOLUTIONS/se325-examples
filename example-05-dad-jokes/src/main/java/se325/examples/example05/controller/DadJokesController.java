@@ -1,10 +1,13 @@
 package se325.examples.example05.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import se325.examples.example05.model.DadJoke;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -88,12 +91,12 @@ public class DadJokesController {
      * @return The added dad joke with its generated ID.
      */
     @PostMapping
-    public DadJoke addDadJoke(@RequestBody DadJoke newJoke) {
+    public ResponseEntity<DadJoke> addDadJoke(@RequestBody DadJoke newJoke) throws URISyntaxException {
         if (newJoke.getText() == null || newJoke.getText().isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dad joke text cannot be blank");
         }
         newJoke.setId(counter.incrementAndGet());
         this.dadJokes.add(newJoke);
-        return newJoke;
+        return ResponseEntity.created(new URI("/dad-jokes/" + newJoke.getId())).body(newJoke);
     }
 }

@@ -120,7 +120,7 @@ public class DadJokesControllerIT {
                         .content(newJoke)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.text").value("Why do seagulls fly over the sea? Because if they flew over the bay they would be bagels."));
     }
 
