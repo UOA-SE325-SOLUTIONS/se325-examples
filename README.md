@@ -16,3 +16,5 @@ Auckland.
 - **[Example 04](./example-04-springboot)**: Contains a simple SpringBoot Web application with a simple REST service, along with associated unit and integration tests.
 
 - **[Example 05](./example-05-dad-jokes)**: Contains a more advanced REST service, allowing users to create and browse dad jokes.
+
+- **[Example 06](./example-06-json-with-jackson)**: Contains standalone examples of how the Jackson library can be used to convert between Java objects and JSON.

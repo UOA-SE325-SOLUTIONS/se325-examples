@@ -1,8 +1,5 @@
 package se325.example06.jacksonsamples.example05_customserialization;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -26,8 +23,6 @@ public class Movie {
         this.title = title;
     }
 
-    @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonDeserialize(using = LocalDateDeserializer.class)
     public LocalDate getReleaseDate() {
         return releaseDate;
     }

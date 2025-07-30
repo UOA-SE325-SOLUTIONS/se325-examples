@@ -9,11 +9,10 @@
     <version>1.0</version>
 
     <properties>
-        <jackson.version>2.10.5</jackson.version>
-        <slf.version>1.7.25</slf.version>
-        <junit.version>4.12</junit.version>
-
-        <mvn.compiler.version>3.8.0</mvn.compiler.version>
+        <java.version>17</java.version>
+        <jackson.version>2.19.2</jackson.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -34,39 +33,20 @@
             <version>${jackson.version}</version>
         </dependency>
 
+        <!-- Support for Java8 Time library -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
         <!-- JUnit -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>6.0.0-M1</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Logging. -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf.version}</version>
-        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <!-- Specify Java version -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${mvn.compiler.version}</version>
-                <configuration>
-                    <release>11</release>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
