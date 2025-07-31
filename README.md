@@ -18,3 +18,5 @@ Auckland.
 - **[Example 05](./example-05-dad-jokes)**: Contains a more advanced REST service, allowing users to create and browse dad jokes.
 
 - **[Example 06](./example-06-json-with-jackson)**: Contains standalone examples of how the Jackson library can be used to convert between Java objects and JSON.
+
+- **[Example 07](./example-07-springboot-other-data-types)**: Shows how we can support data types other than JSON within our Spring apps.
