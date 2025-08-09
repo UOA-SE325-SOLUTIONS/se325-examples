@@ -1,4 +1,4 @@
-# Example - Intro to SpringBoot
+# SE325 Example - Intro to SpringBoot
 
 This project contains an example SpringBoot Web project demonstrating a simple REST service.
 

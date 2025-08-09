@@ -1,4 +1,4 @@
-# SE325 Example 06 - JSON with Jackson
+# SE325 Example - JSON with Jackson
 This project contains several examples showing how we can use Jackson to handle marshalling and unmarshalling Java objects to and from JSON.
 
 - [Example 01](./src/main/java/se325/example06/jacksonsamples/example01_basic): A basic example. We can see in `Example01Main` how the `ObjectMapper` class provided to us by Jackson, can be used to read and write Java objects as JSON. We can also note that the `Book` class being read / written has nothing special about it - it's just a plain old Java object (POJO) with no annotations, or inheritance. Basic classes like this will be handled automatically. We can also see that the `Genre` enum is handled perfectly with no additional configuration.

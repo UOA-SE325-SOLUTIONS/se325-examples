@@ -1,4 +1,4 @@
-# Example - Supporting other data types in Springboot
+# SE325 Example - Supporting other data types in Springboot
 
 Springboot supports JSON by default, using Jackson. We can support other data types easily.
 

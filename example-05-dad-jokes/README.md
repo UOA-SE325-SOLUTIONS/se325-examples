@@ -1,4 +1,4 @@
-# Example - SpringBoot Dad Jokes Service
+# SE325 Example - SpringBoot Dad Jokes Service
 
 This project contains a slightly more advanced web service compared to Example 4.
 

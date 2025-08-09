@@ -1,6 +1,6 @@
-package se325.example09.helloworld;
+package se325.example08.helloworld;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 

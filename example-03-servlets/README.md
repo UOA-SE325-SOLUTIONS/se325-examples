@@ -1,4 +1,4 @@
-# SE325 Example 03 - Java Servlets
+# SE325 Example - Java Servlets
 This project contains two examples of Java servlets.
 
 Servlets run inside a *servlet container* such as [Apache Tomcat](http://tomcat.apache.org/), and handle a subset of the HTTP requests sent to that servlet container, according to their configuration. Such configuration can be either by annotations, or by a [`web.xml`](./src/main/webapp/WEB-INF/web.xml) config file. This example shows the `web.xml` approach.

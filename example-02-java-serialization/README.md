@@ -1,4 +1,4 @@
-# SE325 Example 02 - Java Serialization
+# SE325 Example - Java Serialization
 This project contains an example of how to serialize instances of Java classes, and how to send serialized data over a TCP connection.
 
 The `Employee`, `Manager`, and `EmployeeRequest` classes (in the [`employees`](./src/main/java/se325/example01/employees) package) each implement the [`Serializable`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/Serializable.html) interface (or in the case of `Manager`, extend from a class which does). This tags them as being eligible for serialization.

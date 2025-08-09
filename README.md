@@ -20,3 +20,7 @@ Auckland.
 - **[Example 06](./example-06-json-with-jackson)**: Contains standalone examples of how the Jackson library can be used to convert between Java objects and JSON.
 
 - **[Example 07](./example-07-springboot-other-data-types)**: Shows how we can support data types other than JSON within our Spring apps.
+
+- **[Example 08](./example-08-jpa-intro)**: An introduction to JPA / Hibernate, without SpringBoot.
+
+- **[Example 09](./example-09-jpa-springboot)**: An introduction to Spring Data JPA, which integrates JPA / Hibernate into SpringBoot applications and provides convenience in the form of easier configuration and querying using Spring Data Repositories.

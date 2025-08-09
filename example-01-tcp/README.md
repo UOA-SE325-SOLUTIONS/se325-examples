@@ -1,4 +1,4 @@
-# SE325 Example 01 - TCP
+# SE325 Example - TCP
 This project contains a simple example of how to setup a simple TCP client and server using Java.
 
 The [`Client`](./src/main/java/se325/example01/basictcp/Client.java) class demonstrates how to use a `Socket` to establish a TCP connection to a server. Once established, communication via TCP sockets is **full-duplex** (i.e. *two-way*). This is done via `InputStream` and `OutputStream` subclasses.
