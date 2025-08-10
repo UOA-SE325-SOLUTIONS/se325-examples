@@ -24,3 +24,5 @@ Auckland.
 - **[Example 08](./example-08-jpa-intro)**: An introduction to JPA / Hibernate, without SpringBoot.
 
 - **[Example 09](./example-09-jpa-springboot)**: An introduction to Spring Data JPA, which integrates JPA / Hibernate into SpringBoot applications and provides convenience in the form of easier configuration and querying using Spring Data Repositories.
+
+- **[Example 10](./example-10-parolee-springboot-jpa)**: Shows a more complex JPA / Hibernate domain model (for a Parolee service to track the whereabouts and criminal activities of parolees), and shows how Spring Web and Spring Data can be used easily together to create RESTful services backed by ORM & relational databases.
