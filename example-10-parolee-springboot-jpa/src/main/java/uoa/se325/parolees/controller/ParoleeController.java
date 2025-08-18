@@ -58,7 +58,6 @@ public class ParoleeController {
     public void createMovementForParolee(@PathVariable("id") long id,
                                          @RequestBody Movement movement) {
 
-        System.out.println("HELLO!!!!!");
         Parolee parolee = repo
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

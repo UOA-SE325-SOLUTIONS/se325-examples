@@ -26,3 +26,5 @@ Auckland.
 - **[Example 09](./example-09-jpa-springboot)**: An introduction to Spring Data JPA, which integrates JPA / Hibernate into SpringBoot applications and provides convenience in the form of easier configuration and querying using Spring Data Repositories.
 
 - **[Example 10](./example-10-parolee-springboot-jpa)**: Shows a more complex JPA / Hibernate domain model (for a Parolee service to track the whereabouts and criminal activities of parolees), and shows how Spring Web and Spring Data can be used easily together to create RESTful services backed by ORM & relational databases.
+
+- **[Example 11](./example-11-auction-jpa)**: An auction (items / bids / users) JPA model. Shows of many more of the possible JPA annotations, including optional ones for changing column / table names, switching join columns to join tables, setting eager fetching / lazy loading, using Hibernate-specific fetch operations, custom query methods in Spring Data repositories, and more.

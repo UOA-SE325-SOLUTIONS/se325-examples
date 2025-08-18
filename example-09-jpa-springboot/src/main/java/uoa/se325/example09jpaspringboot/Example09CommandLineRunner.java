@@ -21,7 +21,7 @@ public class Example09CommandLineRunner implements CommandLineRunner {
     }
 
     @Override
-//    @Transactional
+    @Transactional
     public void run(String... args) throws Exception {
         // Create a message and add some comments to it
         Message message = new Message("Hello, World!");
