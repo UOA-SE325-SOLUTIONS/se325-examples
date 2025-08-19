@@ -28,3 +28,7 @@ Auckland.
 - **[Example 10](./example-10-parolee-springboot-jpa)**: Shows a more complex JPA / Hibernate domain model (for a Parolee service to track the whereabouts and criminal activities of parolees), and shows how Spring Web and Spring Data can be used easily together to create RESTful services backed by ORM & relational databases.
 
 - **[Example 11](./example-11-auction-jpa)**: An auction (items / bids / users) JPA model. Shows of many more of the possible JPA annotations, including optional ones for changing column / table names, switching join columns to join tables, setting eager fetching / lazy loading, using Hibernate-specific fetch operations, custom query methods in Spring Data repositories, and more.
+
+- **[Example 12](./example-12-chat-stomp-websockets)**: A simple chat webapp, with a backend powered by Spring / WebSockets / STOMP.
+
+- **[Example 13](./example-13-parolee-websockets)**: Our Parolee web service from before, but with the added functionality that users can listen via WebSockets to be notified whenever a parolee's location changes. This project also shows off how we can test WebSocket code.

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat WebSocket</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Modern SockJS client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"
+            integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Updated STOMP.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.1.1/bundles/stomp.umd.min.js"
+            integrity="sha256-a+h8t3+SADfrpAiWcyVU1wb7dyU4eKD2LOt/bjAXe6M=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Chat WebSocket</h1>
+
+    <div class="form-group">
+        <label for="from">Nickname:</label>
+        <input type="text" id="from" placeholder="Choose a nickname" aria-label="Enter your nickname"/>
+    </div>
+
+    <div class="form-group">
+        <button id="connect" type="button">Connect</button>
+        <button id="disconnect" type="button" class="disconnect-btn" disabled>Disconnect</button>
+    </div>
+
+    <div id="status" class="status disconnected">Disconnected from chat</div>
+
+    <div id="conversationDiv" class="conversation" style="display: none;">
+        <div class="message-input-container">
+            <input type="text" id="text" placeholder="Write a message..." aria-label="Enter your message"/>
+            <button id="sendMessage" type="button" class="send-btn">Send</button>
+        </div>
+        <div id="response" class="messages-container" role="log" aria-label="Chat messages"></div>
+    </div>
+</div>
+
+<!-- External JavaScript -->
+<script src="app.js"></script>
+</body>
+</html>
